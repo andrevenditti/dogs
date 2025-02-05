@@ -1,0 +1,42 @@
+.form {
+  margin-bottom: 2rem;
+}
+
+.passwordReset {
+  display: inline-block;
+  color: #666;
+  padding: 0.5rem 0;
+  line-height: 1;
+}
+
+.passwordReset::after {
+  content: "";
+  display: block;
+  height: 2px;
+  width: 100%;
+  background-color: currentColor;
+}
+
+.createAccount {
+  margin-top: 4rem;
+  p {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+}
+
+
+.subtitle {
+  font-family: var(--type-second);
+  line-height: 1;
+  font-size: 2rem;
+}
+
+.subtitle::after {
+  content: "";
+  display: block;
+  background-color: #ddd;
+  width: 3rem;
+  height: 0.5rem;
+  border-radius: 0 0.2rem 0.2rem 0;
+}
