@@ -32,7 +32,6 @@ const useForm = (type) => {
       return false
     } else {
       setError((prevError) => (prevError ? null : prevError))
-      console.log('bateu')
       return true
     }
   }

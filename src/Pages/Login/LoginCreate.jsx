@@ -4,20 +4,26 @@ import useForm from '../../Hooks/useForm'
 import { Button } from '../../Components/Forms/Button'
 import { UserContext } from '../../Contexts/UserContext'
 import { Error } from '../../Components/Helper/Error'
+import useFetch from '../../Hooks/useFetch'
+import { USER_POST } from '../../api'
 
 export const LoginCreate = () => {
   const username = useForm()
   const password = useForm()
   const email = useForm('email')
-  const { error, loading, userCreate, userLogin } =
-    React.useContext(UserContext)
+  const { userLogin } = React.useContext(UserContext)
+  const { loading, error, request } = useFetch()
 
-  const handleCreateUser = (event) => {
+  const handleCreateUser = async (event) => {
     event.preventDefault()
 
-    if (username.validate() && password.validate() && email.validate()) {
-      userCreate(username.value, password.value, email.value)
-    }
+    const { url, options } = USER_POST({
+      username: username.value,
+      password: password.value,
+      email: email.value,
+    })
+    const { response } = await request(url, options)
+    if (response.ok) userLogin(username.value, password.value)
   }
 
   return (

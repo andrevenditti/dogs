@@ -49,21 +49,6 @@ export const UserStorage = ({ children }) => {
     navigate('/')
   }
 
-  const userCreate = async (username, password, email) => {
-    try {
-      setError(null)
-      setLoading(true)
-      const { url, options } = USER_POST({ username, password, email })
-      const userCreateResponse = await fetch(url, options)
-      if (!userCreateResponse.ok) throw new Error('Erro na criacao')
-      await userCreateResponse.json()
-    } catch (error) {
-      setError(error.message)
-    } finally {
-      setLoading(false)
-    }
-  }
-
   React.useEffect(() => {
     const autoLogin = async () => {
       const token = window.localStorage.getItem('token')
