@@ -1,5 +1,12 @@
 import React from 'react'
+import { UserHeader } from './Components/UserHeader'
+import { Outlet } from 'react-router-dom'
 
 export const User = () => {
-  return <div>User</div>
+  return (
+    <section className="container">
+      <UserHeader />
+      <Outlet />
+    </section>
+  )
 }

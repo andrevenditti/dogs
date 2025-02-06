@@ -11,6 +11,9 @@ import { Login } from './Pages/Login/Login'
 import { UserStorage } from './Contexts/UserContext'
 import { User } from './Pages/User/User'
 import { ProtectedRoute } from './Components/Helper/ProtectedRoute'
+import { Feed } from './Components/Feed/Feed'
+import { UserPhotoPost } from './Pages/User/Components/UserPhotoPost'
+import { UserStats } from './Pages/User/Components/UserStats'
 
 function App() {
   return (
@@ -22,18 +25,22 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />}>
               <Route index element={<LoginForm />} />
-              <Route path="criar" element={<LoginCreate />} />
-              <Route path="perdeu" element={<LoginPasswordLost />} />
-              <Route path="resetar" element={<LoginPasswordReset />} />
+              <Route path="create" element={<LoginCreate />} />
+              <Route path="passwordlost" element={<LoginPasswordLost />} />
+              <Route path="passwordreset" element={<LoginPasswordReset />} />
             </Route>
             <Route
-              path="/conta"
+              path="/account"
               element={
                 <ProtectedRoute>
                   <User />
                 </ProtectedRoute>
               }
-            ></Route>
+            >
+              <Route index element={<Feed />} />
+              <Route path="stats" element={<UserStats />} />
+              <Route path="post" element={<UserPhotoPost />} />
+            </Route>
           </Routes>
           <Footer />
         </UserStorage>

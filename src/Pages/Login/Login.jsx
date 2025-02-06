@@ -5,7 +5,7 @@ import styles from './Login.module.css'
 
 export const Login = () => {
   const { login } = React.useContext(UserContext)
-  if (login === true) return <Navigate to={'/conta'} />
+  if (login === true) return <Navigate to={'/account'} />
   return (
     <div className={styles.loginContainer}>
       <div className={styles.formWrapper}>

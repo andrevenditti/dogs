@@ -34,13 +34,13 @@ export const LoginForm = () => {
         )}
         <Error error={error} />
       </form>
-      <Link className={styles.passwordReset} to={'/login/perdeu'}>
+      <Link className={styles.passwordReset} to={'/login/passwordlost'}>
         Perdeu a senha?
       </Link>
       <div className={styles.createAccount}>
         <h2 className={styles.subtitle}>Cadastre-se</h2>
         <p>Ainda nao possui conta? Cadastre-se na plataforma.</p>
-        <Link className={styleBtn.button} to={'/login/criar'}>
+        <Link className={styleBtn.button} to={'/login/create'}>
           Cadastro
         </Link>
       </div>

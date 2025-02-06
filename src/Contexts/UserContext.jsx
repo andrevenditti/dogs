@@ -26,12 +26,11 @@ export const UserStorage = ({ children }) => {
       setLoading(true)
       const { url, options } = TOKEN_POST({ username, password })
       const tokenRes = await fetch(url, options)
-      // console.log(tokenRes)
       if (!tokenRes.ok) throw new Error(`Usuario invalido`)
       const { token } = await tokenRes.json()
       window.localStorage.setItem('token', token)
       await getUser(token)
-      navigate('/conta')
+      navigate('/account')
     } catch (error) {
       setError(error.message)
       setLogin(false)
