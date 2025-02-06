@@ -3,8 +3,14 @@ import React from 'react'
 const validationTypes = {
   email: {
     regex:
-      /^(([^<>()[]\\.,;:s@"]+(.[^<>()[]\\.,;:s@"]+)*)|.(".+"))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/,
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
     message: 'Preencha um email valido',
+  },
+  password: {
+    regex:
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+    message:
+      'Minimo 8 caracteres, pelo menos uma letra maiuscula, uma letra minuscula, um numero e um carater especial[@$!%*?&]',
   },
 }
 
@@ -17,18 +23,23 @@ const useForm = (type) => {
     if (value.length === 0) {
       setError('Preencha um valor')
       return false
-    } else if (validationTypes[type] && !validationTypes[type].regex) {
+    } else if (
+      validationTypes[type] &&
+      !validationTypes[type].regex.test(value)
+    ) {
       setError(validationTypes[type].message)
+      console.log(!validationTypes[type].regex.test(value))
       return false
     } else {
-      setError(null)
+      setError((prevError) => (prevError ? null : prevError))
+      console.log('bateu')
       return true
     }
   }
 
   const onChange = ({ target }) => {
-    if (error) validate(target.value)
     setValue(target.value)
+    if (error) validate(target.value)
   }
 
   return {

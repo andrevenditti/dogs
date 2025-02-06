@@ -1,5 +1,5 @@
 import React from 'react'
-import { TOKEN_POST, TOKEN_VALIDATE_POST, USER_GET } from '../api'
+import { TOKEN_POST, TOKEN_VALIDATE_POST, USER_GET, USER_POST } from '../api'
 import { useNavigate } from 'react-router-dom'
 
 export const UserContext = React.createContext()
@@ -26,7 +26,7 @@ export const UserStorage = ({ children }) => {
       setLoading(true)
       const { url, options } = TOKEN_POST({ username, password })
       const tokenRes = await fetch(url, options)
-      console.log(tokenRes)
+      // console.log(tokenRes)
       if (!tokenRes.ok) throw new Error(`Usuario invalido`)
       const { token } = await tokenRes.json()
       window.localStorage.setItem('token', token)
@@ -47,6 +47,21 @@ export const UserStorage = ({ children }) => {
     setLogin(false)
     window.localStorage.removeItem('token')
     navigate('/')
+  }
+
+  const userCreate = async (username, password, email) => {
+    try {
+      setError(null)
+      setLoading(true)
+      const { url, options } = USER_POST({ username, password, email })
+      const userCreateResponse = await fetch(url, options)
+      if (!userCreateResponse.ok) throw new Error('Erro na criacao')
+      await userCreateResponse.json()
+    } catch (error) {
+      setError(error.message)
+    } finally {
+      setLoading(false)
+    }
   }
 
   React.useEffect(() => {
@@ -72,7 +87,7 @@ export const UserStorage = ({ children }) => {
 
   return (
     <UserContext.Provider
-      value={{ userLogin, userLogout, data, error, loading, login }}
+      value={{ userCreate, userLogin, userLogout, data, error, loading, login }}
     >
       {children}
     </UserContext.Provider>
