@@ -9,6 +9,8 @@ import { LoginPasswordLost } from './Pages/Login/LoginPasswordLost'
 import { LoginPasswordReset } from './Pages/Login/LoginPasswordReset'
 import { Login } from './Pages/Login/Login'
 import { UserStorage } from './Contexts/UserContext'
+import { User } from './Pages/User/User'
+import { ProtectedRoute } from './Components/Helper/ProtectedRoute'
 
 function App() {
   return (
@@ -24,6 +26,14 @@ function App() {
               <Route path="perdeu" element={<LoginPasswordLost />} />
               <Route path="resetar" element={<LoginPasswordReset />} />
             </Route>
+            <Route
+              path="/conta"
+              element={
+                <ProtectedRoute>
+                  <User />
+                </ProtectedRoute>
+              }
+            ></Route>
           </Routes>
           <Footer />
         </UserStorage>
