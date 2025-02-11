@@ -12,6 +12,10 @@ const validationTypes = {
     message:
       'Minimo 8 caracteres, pelo menos uma letra maiuscula, uma letra minuscula, um numero e um carater especial[@$!%*?&]',
   },
+  number: {
+    regex: /^\d+$/,
+    message: 'Utilize numeros apenas',
+  },
 }
 
 const useForm = (type) => {
