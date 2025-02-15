@@ -45,6 +45,10 @@ button, input {
   margin: 0 auto;
 }
 
+.mainContainer {
+  margin-top: 4rem;
+}
+
 .title {
   margin: 1rem 0;
   font-family: var(--type-second);
